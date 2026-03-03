@@ -87,3 +87,27 @@ Concatenar variables desde la línea de comandos:
 
 ```$ terraform plan -var "app_name=blog" -var "env_name=dev"```
 
+Lanzamos ```terraform apply```
+
+```sh
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_string.suffix: Creating...
+random_string.suffix: Creation complete after 0s [id=od54hq]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+```
+
+Si cambio el valor de ```env_name``` a ```prod``` desde la línea de comandos, para terraform nada cambia porque esa variable no está "conectada" a ningún resource, no necesita cambiar o mover nada para aplicar ese valor. Sin embargo, el valor de la variable se mantiene, pero sin guardarlo en el state file ```terraform.tfstate```. La variable reside en memoria hasta que se vuelve a ejecutar el ```terraform apply```
+
+
+
+
+
+
