@@ -94,27 +94,37 @@ It works!
 ## Complex types
 
 
-```prod.tfvars```
+```vars.tfvars```
 
 ```sh
-env_name        = "prod"
-instance_count  = 5
-enabled         = false
-regions         = ["westeu", "easteu"]
-region_instance_count = {
-    "westeu" = 4
-    "easteu" = 8
+  type = object({
+    kind = string
+    tier = string
+  })
 }
 
 ```
-```outputs.tf```
+```prod.tf```
 
 ```sh
-output "primary_region" {
-  value = var.regions[0]
-}
-
-output "primary_region_instance" {
-  value = var.region_instance_count["easteu"]
+sku_settings = {
+    kind = "P"
+    tier = "Business"
 }
 ```
+Para acceder al kind:
+
+```output.tf```
+```sh
+output "kind" {
+  value = var.sku_settings.kind
+}
+```
+
+```sh
+$ terraform apply -var-file ./env/prod.tfvars
+Changes to Outputs:
+  + kind                    = "P"
+```
+
+It works!

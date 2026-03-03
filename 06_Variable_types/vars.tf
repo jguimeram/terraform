@@ -31,4 +31,11 @@ variable "region_set" {
   type = set(string)
 }
 
+/* complex types: */
 
+variable "sku_settings" {
+  type = object({
+    kind = string
+    tier = string
+  })
+}
