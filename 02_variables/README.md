@@ -1,8 +1,10 @@
-# Hello Terraform
+# VARIABLES
 
 Se puede hacer todo en un solo archivo per por convención se divide el código tal y como se irá mostrando durante estos ejercicos.
 
-Se pueden declarar variables sin valor:
+## Input variales
+
+Se pueden declarar variables sin valor. Se crean un fichero a parte (vars.tf)
 
 ```sh
 variable "app_name" {
@@ -105,6 +107,18 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
 
 Si cambio el valor de ```env_name``` a ```prod``` desde la línea de comandos, para terraform nada cambia porque esa variable no está "conectada" a ningún resource, no necesita cambiar o mover nada para aplicar ese valor. Sin embargo, el valor de la variable se mantiene, pero sin guardarlo en el state file ```terraform.tfstate```. La variable reside en memoria hasta que se vuelve a ejecutar el ```terraform apply```
+
+## Local variables
+
+En el mismo main se pueden declarar variables locales:
+
+```sh
+locals {
+  environment_prefix = "blog-dev"
+}
+```
+
+Al ejecutar ```terraform apply```, dirá que 'no changes' a pesar de estas variables. Esto es así porque no tienen impatco en el output de la ejecución de terraform.
 
 
 

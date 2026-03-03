@@ -3,3 +3,9 @@ resource "random_string" "suffix" {
   upper   = false
   special = false
 }
+
+/* local vars */
+
+locals {
+  environment_prefix = "blog-dev"
+}
