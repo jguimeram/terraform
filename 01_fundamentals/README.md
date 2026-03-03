@@ -67,7 +67,7 @@ Terraform will perform the following actions:
 
 Plan: 1 to add, 0 to change, 0 to destroy.
 ```
-Aplicar el plan: ```sh terraform apply```
+Aplicar el plan: ```terraform apply```
 
 ```sh
 Do you want to perform these actions?
@@ -82,7 +82,7 @@ random_string.suffix: Creation complete after 0s [id=T(LLI#]
 
 Y crea el 'terraform.tfstate'
 
-Como la configuración de terraform es idempotente (acciones que, al ejecutarse múltiples veces, producen el mismo resultado que si se realizaran una sola vez), si lanzo de nuevo ```sh terraform apply ```:
+Como la configuración de terraform es idempotente (acciones que, al ejecutarse múltiples veces, producen el mismo resultado que si se realizaran una sola vez), si lanzo de nuevo ```terraform apply```:
 
 ```sh
 random_string.suffix: Refreshing state... [id=T(LLI#] #este es el valor que ha creado con random string = 6
@@ -93,3 +93,40 @@ Terraform has compared your real infrastructure against your configuration and f
 
 Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 ```
+Si añado un atributo más y lanzo ```terraform plan``` avisa del cambio:
+
+```sh
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # random_string.suffix must be replaced
+-/+ resource "random_string" "suffix" {
+      ~ id          = "T(LLI#" -> (known after apply)
+      ~ result      = "T(LLI#" -> (known after apply)
+      ~ upper       = true -> false # forces replacement
+        # (9 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+```
+
+```terraform apply```
+
+```sh
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_string.suffix: Destroying... [id=T(LLI#]
+random_string.suffix: Destruction complete after 0s
+random_string.suffix: Creating...
+random_string.suffix: Creation complete after 0s [id=+c$nmq]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+```
+
+
