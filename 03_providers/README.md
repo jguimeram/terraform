@@ -67,3 +67,22 @@ suffix = "od54hq"
 Gracias a las extensiones de vscode, puedo ver las diferentes propieades de un recurso:
 
 ![resources](image.png)
+
+# Default input variables
+
+Creando un archivo .tfvars, puedo declarar ahí la input variables
+```sh
+app_name = "blog"
+env_name = "dev"
+```
+Y al hacer ```terraform apply``` ya las reconoce. El archivo ```vars.tf``` lo debo conservar igualmente:
+
+```sh
+variable "app_name" {
+}
+
+variable "env_name" {
+}
+
+```
+
