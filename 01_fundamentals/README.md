@@ -130,3 +130,25 @@ Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 ```
 
 
+Se puede comprobar el cambio en el archivo ```terraform.tfstate```:
+
+```json
+ {
+          "schema_version": 2,
+          "attributes": {
+            "id": "+c$nmq",
+            "keepers": null,
+            "length": 6,
+            "lower": true,
+            "min_lower": 0,
+            "min_numeric": 0,
+            "min_special": 0,
+            "min_upper": 0,
+            "number": true,
+            "numeric": true,
+            "override_special": null,
+            "result": "+c$nmq", /* El resultado es el esperado: string lowercase */
+            "special": true,
+            "upper": false  /* Declarado como false en el main.tf */
+          }
+```
