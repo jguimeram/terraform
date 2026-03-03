@@ -32,3 +32,38 @@ commands will detect it and remind you to do so if necessary.
 ```
 
 ## Referencing Resource Outputs
+
+Puedo crear una output variable que guarde atributos de un resource que haya creado.
+
+Si en el main.tf he creado esto:
+
+```sh
+resource "random_string" "suffix" {
+  length  = 6
+  upper   = false
+  special = false
+}
+```
+
+En el fichero output puedo declarar una variable que me permite guardar el valor del resource "random_string" con el nombre "suffix".
+
+```sh
+output "suffix" {
+  value = random_string.suffix.result /* resource "random_string" "suffix" */
+}
+```
+
+En este caso, guardo la propiedad result del resource 'random_string' que yo he llamado 'suffix', tal y como se ve en el fichero main.tf
+
+Salida:
+
+```sh
+app_name = "blog"
+env_name = "prod"
+env_prefix = "blog-prod"
+suffix = "od54hq"
+```
+
+Gracias a las extensiones de vscode, puedo ver las diferentes propieades de un recurso:
+
+![resources](image.png)

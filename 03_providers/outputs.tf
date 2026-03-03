@@ -11,3 +11,8 @@ output "env_name" {
 output "env_prefix" {
   value = local.environment_prefix /* variable declarada en main.tf */
 }
+
+
+output "suffix" {
+  value = random_string.suffix.result /* resource "random_string" "suffix" */
+}
