@@ -152,3 +152,27 @@ Se puede comprobar el cambio en el archivo ```terraform.tfstate```:
             "upper": false  /* Declarado como false en el main.tf */
           }
 ```
+
+Con ```terraform destroy``` elimino la configuración creada en ```terraform.tfstate``` de acuerdo a ```main.tf```
+
+```
+
+  # random_string.suffix will be destroyed
+  - resource "random_string" "suffix" {
+      - id          = "]s2)){" -> null
+      - length      = 6 -> null
+      - lower       = true -> null
+      - min_lower   = 0 -> null
+      - min_numeric = 0 -> null
+      - min_special = 0 -> null
+      - min_upper   = 0 -> null
+      - number      = true -> null
+      - numeric     = true -> null
+      - result      = "]s2)){" -> null
+      - special     = true -> null
+      - upper       = false -> null
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+```
