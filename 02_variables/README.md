@@ -121,7 +121,134 @@ locals {
 Al ejecutar ```terraform apply```, dirá que 'no changes' a pesar de estas variables. Esto es así porque no tienen impatco en el output de la ejecución de terraform.
 
 
+# Output variables
+
+Permiten extraer las variables hacia los registros, o programas externos.
+
+Por convención, se crea en un ```output.tf```
+
+En las outputs var le puedo asignar las input variables:
+
+```sh
+output "app_name" {
+  value = var.app_name # declarada en vars.tf"
+}
+
+```
+
+Si ejecuto ahora ```$ terraform plan -var "app_name=blog" -var "env_name=dev"``` sí que notifica el cambio
+
+```sh
+$ terraform plan -var "app_name=blog" -var "env_name=dev"
+random_string.suffix: Refreshing state... [id=od54hq]
+
+Changes to Outputs:
+  + app_name = "blog"
+
+You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+```
+Al ejecutar ```$ terraform apply -var "app_name=blog" -var "env_name=dev"``` muestra el output:
+
+```sh
+app_name = "blog"
+```
+
+Con el siguiente comando puedo ver el valor de la variable que he declarado en vars, capturado en outputs y pasado el valor desde la línea de comandos.
+
+```sh
+$ terraform output app_name
+"blog"
+```
+
+Si añadimos más variables, tenemos que ejecutar ```$ terraform apply````. De lo contrario, terraform no modifica su estado.
+
+```sh
+$ terraform output environment_name
+╷
+│ Error: Output "environment_name" not found
+│ 
+│ The output variable requested could not be found in the state file. If you recently added this to your configuration, be sure to run `terraform apply`, since the state won't be updated with new output variables until that command is run.
+```
+
+He añadido 
+```sh
+output "env_prefix" {
+  value = local.environment_prefix /* variable declarada en main.tf */
+}
+```
+
+y fijado el valor en las input vars:
+
+```sh
+variable "app_name" {
+  type    = string
+  default = "blog"
+}
+
+variable "env_name" {
+  type    = string
+  default = "prod"
+}
+```
+
+```$ terraform apply```
+
+```sh
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
 
 
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
+Outputs:
+
+app_name = "blog"
+env_name = "prod"
+env_prefix = "blog-dev"
+```
+Se puede observar que el archivo ```terraform.tfstate``` se actualiza:
+
+```json
+"outputs": {
+    "app_name": {
+      "value": "blog",
+      "type": "string"
+    },
+    "env_name": {
+      "value": "prod",
+      "type": "string"
+    },
+    "env_prefix": {
+      "value": "blog-dev",
+      "type": "string"
+    }
+  },
+```
+
+# String Interpolations
+
+Con string interpolations podemos evitar hardcodear valores y pasar de esto:
+
+```sh
+locals {
+  environment_prefix = "blog-dev"
+}
+
+```
+
+a esto:
+
+```sh
+locals {
+  environment_prefix = "${var.app_name}-${var.env_name}"
+}
+
+```
 

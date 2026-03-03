@@ -7,5 +7,5 @@ resource "random_string" "suffix" {
 /* local vars */
 
 locals {
-  environment_prefix = "blog-dev"
+  environment_prefix = "${var.app_name}-${var.env_name}"
 }
