@@ -1,0 +1,11 @@
+{
+  "Shell Script Markdown": {
+    "prefix": "`s",
+    "body": [
+      "```sh",
+      "$1",
+      "```"
+    ],
+    "description": "Inserts a shell script markdown block."
+  }
+}
