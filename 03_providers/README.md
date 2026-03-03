@@ -86,3 +86,5 @@ variable "env_name" {
 
 ```
 
+## Input variables for env config
+
