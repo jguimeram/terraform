@@ -25,3 +25,11 @@ env_name = "prod"
 env_prefix = "blog-prod-od54hq"
 suffix = "od54hq"
 ```
+
+## Managing input vars file for multiple env
+
+Una buena práctica es crear un directorio llamado env y dentro colocar un archivo por cada entorno (prod, test, dev):
+
+![env files](image.png)
+
+
