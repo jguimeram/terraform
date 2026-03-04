@@ -61,3 +61,14 @@ $ terraform apply -var-file ./env/prod.tfvars
 │ 
 │ This was checked by the validation rule at variables.tf:20,3-13.
 ```
+
+Puedo crear un fichero llamado ```validation.tf``` y pasar ahí los locals utilizados en la validación anterior y funciona correctamente:
+
+```sh
+validation.tf
+
+locals {
+  min_nodes = 5
+  max_nodes = 9
+}
+```

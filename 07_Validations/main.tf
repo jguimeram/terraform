@@ -1,8 +1,3 @@
-locals {
-  min_nodes = 5
-  max_nodes = 9
-}
-
 
 resource "random_string" "suffix" {
   length  = 6
