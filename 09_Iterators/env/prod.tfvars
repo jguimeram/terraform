@@ -1,6 +1,6 @@
 env_name        = "prod"
 instance_count  = 5
-enabled         = false
+enabled         = true
 regions         = ["westeu", "easteu"]
 region_instance_count = {
     "westeu" = 4
