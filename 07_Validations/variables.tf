@@ -1,6 +1,9 @@
 variable "app_name" {
   type = string
-
+  validation {
+    condition     = length(var.app_name) <= 12
+    error_message = "App name must be less than or equal to 12"
+  }
 }
 
 variable "env_name" {
@@ -14,6 +17,10 @@ variable "api_key" {
 
 variable "instance_count" {
   type = number
+  validation {
+    condition     = var.instance_count >= local.min_nodes && var.instance_count < local.max_nodes && var.instance_count % 2 != 0
+    error_message = "Must be between 5 and 10"
+  }
 }
 
 variable "enabled" {
