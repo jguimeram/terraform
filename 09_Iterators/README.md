@@ -63,3 +63,52 @@ resource "random_string" "list" {
   special = false
 }
 ```
+
+## Maps
+
+```sh
+resource "random_string" "map" {
+  for_each = var.region_instance_count
+  length   = 6
+  upper    = false
+  special  = false
+}
+```
+
+```sh
+Terraform will perform the following actions:
+
+  # random_string.map["easteu"] will be created
+  + resource "random_string" "map" {
+      + id          = (known after apply)
+      + length      = 6
+      + lower       = true
+      + min_lower   = 0
+      + min_numeric = 0
+      + min_special = 0
+      + min_upper   = 0
+      + number      = true
+      + numeric     = true
+      + result      = (known after apply)
+      + special     = false
+      + upper       = false
+    }
+
+  # random_string.map["westeu"] will be created
+  + resource "random_string" "map" {
+      + id          = (known after apply)
+      + length      = 6
+      + lower       = true
+      + min_lower   = 0
+      + min_numeric = 0
+      + min_special = 0
+      + min_upper   = 0
+      + number      = true
+      + numeric     = true
+      + result      = (known after apply)
+      + special     = false
+      + upper       = false
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+```
